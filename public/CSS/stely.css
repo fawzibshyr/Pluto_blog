@@ -1,0 +1,147 @@
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+:root{
+  --bg: #D4E0C9;
+  --bar: rgba(212,224,201,.92);       /* D4E0C9 */
+  --panel: rgba(255,255,255,.70);
+  --line: #e6eaee;
+  --text: #1f2328;
+  --muted: #6b7280;
+
+  --radius: 16px;
+  --radius-lg: 20px;
+  --shadow: 0 14px 30px rgba(16,24,40,.08);
+  --transition: all .2s ease;
+}
+
+html,body{ height:100%; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+
+.navigation{
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index: 999;
+  background: var(--bar);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(31,35,40,.10);
+}
+
+.nav-container{
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.logo{
+  text-decoration:none;
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: .3px;
+  font-size: 20px;
+  line-height: 1;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo::before{
+  content:"";
+  width:10px; height:10px;
+  border-radius:50%;
+  background:#3b82f6;
+  box-shadow: 0 0 0 6px rgba(59,130,246,.15);
+  display:inline-block;
+}
+
+.nav-menu{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.nav-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  text-decoration:none;
+  color: var(--text);
+  font-weight: 800;
+  font-size: 14px;
+
+  border: 1px solid transparent;
+  background: transparent;
+  transition: var(--transition);
+}
+
+.nav-link:hover{
+  background: rgba(255,255,255,.55);
+  border-color: rgba(31,35,40,.10);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,.06);
+}
+
+.nav-link.active{
+  background: rgba(59,130,246,.10);
+  border-color: rgba(59,130,246,.25);
+  color: #1d4ed8;
+}
+
+.nav-menu form{
+  display:inline-flex;
+}
+.nav-menu form button.nav-link{
+  cursor:pointer;
+  border: 1px solid transparent;
+}
+
+
+.page{
+  padding-top: 78px;
+  min-height: calc(100vh - 78px);
+}
+
+
+.footer{
+  padding: 26px 0;
+}
+.footer-bottom{
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+  border-top: 1px solid rgba(31,35,40,.10);
+}
+.copyright{
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+
+@media (max-width: 920px){
+  .logo{ font-size: 18px; }
+  .nav-link{ padding: 9px 10px; font-size: 13px; }
+}
+
+@media (max-width: 680px){
+  .nav-container{ padding: 12px 12px; }
+  .nav-menu{
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .page{ padding-top: 86px; }
+}
