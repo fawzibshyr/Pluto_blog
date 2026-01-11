@@ -1,81 +1,105 @@
-<x-guest-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-<div class="wrapper" id="formWrapper">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Login Form -->
-  <div class="form-container login">
-    <h2>Login</h2>
+    <!-- Auth CSS -->
+    <link rel="stylesheet" href="{{ asset('CSS/login.css') }}">
+</head>
+<body>
 
-    <form method="POST" action="{{ route('login') }}">
-      @csrf
+    <!-- Background -->
+    <div class="page-background"></div>
 
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
+    <div class="container">
+        <div class="auth-card">
 
-      <div class="forgot-password" tabindex="0">Forgot password?</div>
+            <!-- Illustration -->
+            <!-- <div class="illustration">
+                <img src="https://mgx-backend-cdn.metadl.com/generate/images/701466/2026-01-04/54f3ae53-81f4-4561-82bd-15edf4218f6d.png"
+                     alt="Login Illustration">
+            </div> -->
 
-      <button type="submit" class="submit-btn">Login</button>
+            <h1>Welcome Back</h1>
+            <!-- <p class="subtitle">Please login to your account</p> -->
 
-      <!-- <div class="social-login">
-        
-      </div> -->
-    </form>
-  </div>
+            <!-- Status message -->
+            @if (session('status'))
+                <div class="success-message">
+                    {{ session('status') }}
+                </div>
+            @endif
 
-  <!-- Signup Form -->
-  <div class="form-container signin">
-    <h2>Sign Up</h2>
+            <form method="POST" action="{{ route('login') }}" class="auth-form" novalidate>
+                @csrf
 
-    <form method="POST" action="{{ route('register') }}">
-      @csrf
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        placeholder="Enter your email"
+                        required
+                        autofocus
+                        class="@error('email') error @enderror"
+                    >
+                    <span class="error-message">
+                        @error('email') {{ $message }} @enderror
+                    </span>
+                </div>
 
-      <input type="text" name="name" placeholder="Username" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <input type="password" name="password_confirmation" placeholder="Confirmed Password" required />
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        class="@error('password') error @enderror"
+                    >
+                    <span class="error-message">
+                        @error('password') {{ $message }} @enderror
+                    </span>
+                </div>
 
-      <label class="accept-terms">
-        <input type="checkbox" required /> I accept the terms & conditions
-      </label>
+                <!-- Remember / Forgot -->
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <span>Remember me</span>
+                    </label>
 
-      <button type="submit" class="submit-btn">Sign Up</button>
+                    <!-- Forgot password (disabled) -->
+                    <a href="#" class="link" onclick="return false;">Forgot password?</a>
 
-      <!-- <div class="social-login">
-        
-      </div> -->
-    </form>
-  </div>
+                </div>
 
-  
-  <div class="toggle-container">
-    <h2 id="toggleHeading">Don't have an account?</h2>
-    <p id="toggleText">Sign up to get started!</p>
-    <button class="switch-btn" id="toggleBtn" type="button">Sign Up</button>
-  </div>
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary btn-full">
+                    Login
+                </button>
 
-</div>
+                <!-- Footer -->
+                <p class="form-footer">
+                    Don't have an account?
+                    <a href="{{ route('register') }}" class="link">Register here</a>
+                </p>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const wrapper = document.getElementById('formWrapper');
-  const toggleBtn = document.getElementById('toggleBtn');
-  const toggleHeading = document.getElementById('toggleHeading');
-  const toggleText = document.getElementById('toggleText');
+            </form>
+        </div>
+    </div>
 
-  toggleBtn.addEventListener('click', () => {
-    wrapper.classList.toggle('active');
-
-    if(wrapper.classList.contains('active')){
-      toggleHeading.textContent = "Already have an account?";
-      toggleText.textContent = "Login to your account!";
-      toggleBtn.textContent = "Login";
-    } else {
-      toggleHeading.textContent = "Don't have an account?";
-      toggleText.textContent = "Sign up to get started!";
-      toggleBtn.textContent = "Sign Up";
-    }
-  });
-});
-</script>
-
-</x-guest-layout>
+</body>
+</html>
